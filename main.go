@@ -21,8 +21,12 @@ func setupRouter(pcounter *int) *gin.Engine {
         c.String(http.StatusOK, strconv.Itoa(*pcounter))
     })
 
+    // Single user since I don't need anything more
+    user := os.Getenv("CWK_USERNAME")
+    password := os.Getenv("CWK_PASSWORD")
+
     authorized := r.Group("/", gin.BasicAuth(gin.Accounts{
-        "pokerfacowaty": "123",
+        user: password,
     }))
 
     authorized.POST("/add", func(context *gin.Context) {
