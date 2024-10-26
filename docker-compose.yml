@@ -1,0 +1,11 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cwk
+    command: ./cwk
+    ports:
+      - "8080:8080"
+    environment:
+      - GIN_MODE=debug # change to "release" when running in production
